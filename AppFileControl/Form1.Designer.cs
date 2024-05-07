@@ -36,6 +36,9 @@
             txtFolder = new TextBox();
             txtProcessFileNumber = new TextBox();
             TxtContent = new TextBox();
+            lstvData = new ListView();
+            BtnDataSave = new Button();
+            combxOption = new ComboBox();
             SuspendLayout();
             // 
             // btnSelectFolder
@@ -85,9 +88,9 @@
             // TextSave
             // 
             TextSave.Font = new Font("Segoe UI", 13F);
-            TextSave.Location = new Point(497, 143);
+            TextSave.Location = new Point(738, 36);
             TextSave.Name = "TextSave";
-            TextSave.Size = new Size(260, 53);
+            TextSave.Size = new Size(157, 53);
             TextSave.TabIndex = 4;
             TextSave.Text = "Save Word Text";
             TextSave.UseVisualStyleBackColor = true;
@@ -112,7 +115,7 @@
             txtProcessFileNumber.Name = "txtProcessFileNumber";
             txtProcessFileNumber.ReadOnly = true;
             txtProcessFileNumber.ScrollBars = ScrollBars.Both;
-            txtProcessFileNumber.Size = new Size(495, 40);
+            txtProcessFileNumber.Size = new Size(475, 40);
             txtProcessFileNumber.TabIndex = 6;
             // 
             // TxtContent
@@ -121,14 +124,46 @@
             TxtContent.Multiline = true;
             TxtContent.Name = "TxtContent";
             TxtContent.ScrollBars = ScrollBars.Vertical;
-            TxtContent.Size = new Size(776, 231);
+            TxtContent.Size = new Size(458, 385);
             TxtContent.TabIndex = 7;
+            // 
+            // lstvData
+            // 
+            lstvData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lstvData.Location = new Point(497, 207);
+            lstvData.Name = "lstvData";
+            lstvData.Size = new Size(415, 385);
+            lstvData.TabIndex = 8;
+            lstvData.UseCompatibleStateImageBehavior = false;
+            // 
+            // BtnDataSave
+            // 
+            BtnDataSave.Location = new Point(738, 143);
+            BtnDataSave.Name = "BtnDataSave";
+            BtnDataSave.Size = new Size(134, 40);
+            BtnDataSave.TabIndex = 9;
+            BtnDataSave.Text = "Data Save";
+            BtnDataSave.UseVisualStyleBackColor = true;
+            BtnDataSave.Click += BtnDataSave_Click;
+            // 
+            // combxOption
+            // 
+            combxOption.FormattingEnabled = true;
+            combxOption.Items.AddRange(new object[] { "Iconos Grandes", "Iconos Pequeños", "Titulos", "Lista" });
+            combxOption.Location = new Point(573, 160);
+            combxOption.Name = "combxOption";
+            combxOption.Size = new Size(121, 23);
+            combxOption.TabIndex = 10;
+            combxOption.SelectedIndexChanged += combxOption_SelectedIndexChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(924, 604);
+            Controls.Add(combxOption);
+            Controls.Add(BtnDataSave);
+            Controls.Add(lstvData);
             Controls.Add(TxtContent);
             Controls.Add(txtProcessFileNumber);
             Controls.Add(txtFolder);
@@ -138,7 +173,7 @@
             Controls.Add(btnProcessFolder);
             Controls.Add(btnSelectFolder);
             Name = "Form1";
-            Text = "Form1";
+            Text = "lstvData";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -153,5 +188,8 @@
         private TextBox txtFolder;
         private TextBox txtProcessFileNumber;
         private TextBox TxtContent;
+        private ListView lstvData;
+        private Button BtnDataSave;
+        private ComboBox combxOption;
     }
 }

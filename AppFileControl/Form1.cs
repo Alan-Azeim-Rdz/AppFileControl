@@ -1,13 +1,17 @@
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml;
+using System;
+using System.Windows.Forms;
 
 namespace AppFileControl
 {
     public partial class Form1 : Form
     {
+        private ImageList imageList;
         public Form1()
         {
+            imageList = new ImageList();
             InitializeComponent();
         }
 
@@ -138,6 +142,69 @@ namespace AppFileControl
                 }
 
 
+            }
+        }
+        private void BtnDataSave_Click(object sender, EventArgs e)
+        {
+            
+            imageList.ImageSize = new Size(16, 16);
+
+            string[] filesInFolder = Directory.GetFiles(txtFolder.Text);
+            foreach (string file in filesInFolder)
+            {
+                try
+                {
+                    // Obtener la imagen del archivo (puedes cambiar el tamaño si es necesario)
+                    using (var icon = Icon.ExtractAssociatedIcon(file))
+                    {
+                        // Agrega la imagen al ImageList
+                        imageList.Images.Add(icon.ToBitmap());
+                       
+                    }
+
+                    // Obtén el nombre del archivo sin extensión
+                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
+                    ListViewItem image = new ListViewItem(fileNameWithoutExtension);
+                    // Asocia el índice de la imagen en el ImageList con el ListViewItem
+                    image.ImageIndex = imageList.Images.Count - 1;
+                    lstvData.Items.Add(image);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al cargar la imagen para " + file + ": " + ex.Message);
+                }
+
+            }
+
+            // Asociar el ImageList al ListView
+            lstvData.SmallImageList = imageList;
+
+        }
+
+        private void combxOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcionSeleccionada = combxOption.SelectedItem.ToString();
+            switch(opcionSeleccionada) 
+            {
+                case "Titulos":
+                    lstvData.View = System.Windows.Forms.View.Tile;
+                    break;
+                case "Iconos Grandes":
+                    lstvData.View = System.Windows.Forms.View.LargeIcon;
+                    // Asociar el ImageList grande al ListView para mostrar las imágenes grandes
+                    lstvData.LargeImageList = imageList;
+
+                    break;
+                case "Iconos Pequeños":
+                    lstvData.View = System.Windows.Forms.View.SmallIcon;
+                    break;
+                case "Lista":
+                    lstvData.View = System.Windows.Forms.View.List;
+                    break;
+
+
+                default:
+                    break;
             }
         }
     }
